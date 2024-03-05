@@ -5,6 +5,7 @@ import MarketOverview from './MarketOverview.vue'
 <template>
   <div class="quotation-wrapper h-full p-3">
     <MarketOverview title="买入大盘" />
+    <MarketOverview title="卖出大盘" />
   </div>
 </template>
 

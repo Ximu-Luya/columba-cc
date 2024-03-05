@@ -1,5 +1,5 @@
 <script setup lang='ts'>
-import { onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import * as echarts from 'echarts'
 import CardBox from '@src/components/CardBox.vue'
 
@@ -9,6 +9,7 @@ const props = defineProps({
     default: '行情'
   }
 })
+const chartId = ref('chart-' + Math.random().toString(36).substring(2))
 
 onMounted(() => {
   let base = +new Date(1968, 9, 3)
@@ -21,7 +22,7 @@ onMounted(() => {
     data.push(Math.round((Math.random() - 0.5) * 20 + data[i - 1]))
   }
   console.log({date, data})
-  const chart = echarts.init(document.getElementById('chart') as HTMLDivElement, null, { renderer: 'svg' })
+  const chart = echarts.init(document.getElementById(chartId.value) as HTMLDivElement, null, { renderer: 'svg' })
   chart.setOption({
     grid: {
       top: '12px',
@@ -86,7 +87,7 @@ onMounted(() => {
     </div>
 
     <div class="content">
-      <div id="chart" class="h-40"></div>
+      <div :id="chartId" class="h-40"></div>
     </div>
   </CardBox>
 </template>
