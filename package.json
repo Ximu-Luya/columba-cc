@@ -13,6 +13,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "echarts": "^5.5.0",
     "naive-ui": "^2.36.0",
     "pinia": "^2.1.7",
     "vue": "^3.3.11",

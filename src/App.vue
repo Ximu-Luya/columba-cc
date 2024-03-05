@@ -10,7 +10,7 @@ import NavBar from './components/NavBar.vue'
     
   </NConfigProvider> -->
   <div class="h-full flex-col flex">
-    <section class="flex-grow">
+    <section class="page-wrapper flex-grow">
       <RouterView />
     </section>
     <NavBar />
@@ -18,5 +18,7 @@ import NavBar from './components/NavBar.vue'
 </template>
 
 <style scoped>
-
+.page-wrapper {
+  background-color: #F6F6F6;
+}
 </style>
