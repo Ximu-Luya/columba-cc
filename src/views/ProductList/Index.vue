@@ -1,6 +1,7 @@
 <script setup lang='ts'>
 import { h, ref, onMounted } from 'vue'
 import { NDataTable, type DataTableColumns } from 'naive-ui'
+import CardBox from '@src/components/CardBox.vue'
 import ProductCell from './ProductCell.vue'
 
 import testData from '@/data/test_data.json'

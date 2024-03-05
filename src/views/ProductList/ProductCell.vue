@@ -1,7 +1,7 @@
 <template>
   <div class="product-cell">
     <div class="name">{{ props.name }}</div>
-    <div class="origin text-sm text-gray-700">原产地：{{ props.origin }}</div>
+    <div class="origin text-xs text-gray-400">原产地：{{ props.origin }}</div>
   </div>
 </template>
   
