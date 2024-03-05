@@ -32,7 +32,7 @@ const activeBar = computed(() => {
 
 <template>
   <!-- 底部导航栏 -->
-  <section class="nav-bar flex bg-white h-14">
+  <section class="nav-bar flex bg-white h-14 flex-shrink-0">
     <div v-for="item in navList" :key="item.path" class="flex-1 flex justify-center items-center">
       <router-link
         :to="item.path"
