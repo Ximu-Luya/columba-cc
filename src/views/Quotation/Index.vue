@@ -3,7 +3,7 @@ import MarketOverview from './MarketOverview.vue'
 </script>
 
 <template>
-  <div class="quotation-wrapper h-full p-3">
+  <div class="quotation-wrapper h-full">
     <MarketOverview title="买入大盘" />
     <MarketOverview title="卖出大盘" />
   </div>

@@ -10,7 +10,7 @@ import NavBar from './components/NavBar.vue'
     
   </NConfigProvider> -->
   <div class="h-full flex-col flex">
-    <section class="page-wrapper flex-grow flex-shrink overflow-y-auto">
+    <section class="page-wrapper flex-grow flex-shrink overflow-y-auto p-3">
       <RouterView />
     </section>
     <NavBar />
