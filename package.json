@@ -13,6 +13,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "dayjs": "^1.11.10",
     "echarts": "^5.5.0",
     "naive-ui": "^2.36.0",
     "pinia": "^2.1.7",
