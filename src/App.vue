@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
+import NavBar from './components/NavBar.vue'
 // import { darkTheme, NConfigProvider } from 'naive-ui'
 </script>
 
@@ -8,8 +9,14 @@ import { RouterView } from 'vue-router'
   <!-- <NConfigProvider :theme="darkTheme">
     
   </NConfigProvider> -->
-  <RouterView />
+  <div class="h-full flex-col flex">
+    <section class="flex-grow">
+      <RouterView />
+    </section>
+    <NavBar />
+  </div>
 </template>
 
 <style scoped>
+
 </style>
