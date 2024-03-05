@@ -1,28 +1,39 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
+import IconCompass from './icons/IconCompass.vue'
+import IconBox from './icons/IconBox.vue'
+import IconGraphUp from './icons/IconGraphUp.vue'
+import IconCheck from './icons/IconCheck.vue'
+import IconChatDot from './icons/IconChatDot.vue'
+
 const route = useRoute()
 
 const navList = ref([
   {
     name: '发现',
     path: '/',
-    icon: 'home'
+    icon: IconCompass
   },
   {
     name: '货物总览',
     path: '/product-list',
-    icon: 'product-list'
+    icon: IconBox
   },
   {
-    name: '行情',
+    name: '大盘行情',
     path: '/quotation',
-    icon: 'quotation'
+    icon: IconGraphUp
   },
   {
-    name: '自选',
+    name: '自选货物',
     path: '/pick',
-    icon: 'pick'
+    icon: IconCheck
+  },
+  {
+    name: '留言板',
+    path: '/message-board',
+    icon: IconChatDot
   }
 ])
 const activeBar = computed(() => {
@@ -39,7 +50,7 @@ const activeBar = computed(() => {
         class="flex flex-col items-center"
         :class="{'active': activeBar === item.path}"
       >
-        <n-icon :size="24">{{ item.icon }}</n-icon>
+        <component :is="item.icon" class="w-6 h-6"></component>
         <span class="text-xs">{{ item.name }}</span>
       </router-link>
     </div>
