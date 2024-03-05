@@ -1,0 +1,13 @@
+<template>
+  <div class="product-cell">
+    <div class="name">{{ props.name }}</div>
+    <div class="origin text-sm text-gray-700">原产地：{{ props.origin }}</div>
+  </div>
+</template>
+  
+<script setup lang='ts'>
+const props = defineProps<{
+  name: string
+  origin: string
+}>() 
+</script>

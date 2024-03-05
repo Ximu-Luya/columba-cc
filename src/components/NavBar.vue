@@ -10,6 +10,11 @@ const navList = ref([
     icon: 'home'
   },
   {
+    name: '货物总览',
+    path: '/product-list',
+    icon: 'product-list'
+  },
+  {
     name: '行情',
     path: '/quotation',
     icon: 'quotation'

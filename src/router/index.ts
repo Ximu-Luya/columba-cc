@@ -10,11 +10,16 @@ const router = createRouter({
       component: HomeView
     },
     {
-      path: '/quotation',
-      name: 'quotation',
+      path: '/product-list',
+      name: 'product-list',
       // 路由级别的代码拆分
       // 这将为该路由生成一个单独的块（About.[hash].js）
       // 当访问该路由时，该块将被延迟加载。
+      component: () => import('../views/ProductList/Index.vue')
+    },
+    {
+      path: '/quotation',
+      name: 'quotation',
       component: () => import('../views/Quotation/Index.vue')
     }
   ]
