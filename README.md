@@ -1,46 +1,22 @@
-# code-war
+# 科伦巴商会/columba-cc
 
-This template should help get you started developing with Vue 3 in Vite.
+这是一个查看雷索纳斯游戏中各地货物实时价格的应用，帮助各位列车长更好地选择货物运输路线，进行更好的交易(倒货)。目前项目正在开发中，计划支持的功能:
 
-## Recommended IDE Setup
+- [x] 查看各地货物实时价格与涨跌
+- [x] 查看各地货物的历史价格走势（折线图、K线图）
+- [x] 查看各地货物的利润（单位利润）
+- [x] 根据货物价格与利润进行排序
+- [x] 分析当前最高单次利润运输路线和最高进货书利用方案
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
-
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
-
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
+## 本地运行/开发测试
 
 ```sh
 npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
+### 应用构建/打包
 
 ```sh
 npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
 ```
