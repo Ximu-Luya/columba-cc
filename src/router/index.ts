@@ -21,6 +21,11 @@ const router = createRouter({
       path: '/quotation',
       name: 'quotation',
       component: () => import('../views/Quotation/Index.vue')
+    },
+    {
+      path: '/message-board',
+      name: 'message-board',
+      component: () => import('../views/MessageBoard/Index.vue')
     }
   ]
 })
