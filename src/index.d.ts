@@ -5,4 +5,5 @@ type CityPrice = {
   price: number
   pricePercent: number
   trend: PriceTrend
+  uploadedAt: string
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="price-cell">
+  <div class="price-cell flex-shrink-0 pl-2 pr-2">
     <div class="city-name">{{ data.cityName }}</div>
     <div class="price-percent" :class="priceColor">
       <span class="percent">{{ data.pricePercent }}%</span>
@@ -30,5 +30,7 @@ const priceColor = computed(() => {
 </script>
 
 <style lang="scss" scoped>
-
+.price-cell {
+  min-width: 130px;
+}
 </style>

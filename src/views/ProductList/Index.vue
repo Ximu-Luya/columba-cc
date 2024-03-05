@@ -6,6 +6,7 @@ import ProductCell from './ProductCell.vue'
 import PriceCell from './PriceCell.vue'
 
 import testData from '@/data/test_data.json'
+import CityQuotationCell from './CityQuotationCell.vue'
 const productList = ref<ProductData[]>([])
 
 type ProductData = {
@@ -24,13 +25,14 @@ type ProductData = {
   /**
    * 各城市报价
    */
-  cityQuotation: CityPrice[]
+  cityQuotations: CityPrice[]
 }
 
-const createColumns = (): DataTableColumns<ProductData> => [
+const columns = ref<DataTableColumns<ProductData>>([
   {
     title: '货物名称',
     key: 'name',
+    width: 150,
     render: (productData: ProductData) => {
       return h(
         ProductCell,
@@ -52,30 +54,15 @@ const createColumns = (): DataTableColumns<ProductData> => [
         }
       )
     }
-  }
-]
-const columns = ref([
-  {
-    title: '货物名称',
-    key: 'name',
-    render: (productData: ProductData) => {
-      return h(
-        ProductCell,
-        {
-          name: productData.name,
-          origin: productData.origin
-        }
-      )
-    }
   },
   {
-    title: '采购价',
-    key: 'purchasePrice',
+    title: '各城市报价',
+    key: 'cityQuotation',
     render: (productData: ProductData) => {
       return h(
-        PriceCell,
+        CityQuotationCell,
         {
-          data: productData.purchasePrice!
+          data: productData.cityQuotations
         }
       )
     }
@@ -86,43 +73,57 @@ onMounted(() => {
   const tableData: ProductData[] = []
   testData.forEach(priceItem => {
     const product = tableData.find(product => product.name === priceItem.name)
+    const priceData: CityPrice = {
+      cityName: priceItem.type == 'buy' ? priceItem.city : priceItem.targetCity,
+      price: priceItem.price,
+      pricePercent: priceItem.percent,
+      trend: priceItem.trend as PriceTrend,
+      uploadedAt: priceItem.uploadedAt
+    }
+    
     if(product) {
       if(priceItem.type == 'buy') {
-        product.purchasePrice = {
-          cityName: priceItem.city,
-          price: priceItem.price,
-          pricePercent: priceItem.percent,
-          trend: priceItem.trend as PriceTrend
+        /**
+         * 1. 采购价已存在
+         * 2. 新读取的数据上传时间早于已有数据
+         * 以上两个条件满足时，不更新采购价
+         */
+        if(product.purchasePrice) {
+          product.origin = [product.origin, priceItem.city].join(', ')
+          // 新读取的数据上传时间早于已有数据，不对采购价进行更新
+          if(new Date(priceItem.uploadedAt) < new Date(product.purchasePrice.uploadedAt)) return
         }
+
+        product.purchasePrice = priceData
       } else {
-        product.cityQuotation.push({
-          cityName: priceItem.targetCity,
-          price: priceItem.price,
-          pricePercent: priceItem.percent,
-          trend: priceItem.trend as PriceTrend
-        })
+        const targetCityQuotation = product.cityQuotations.find(cityQuotation => cityQuotation.cityName === priceItem.targetCity)
+        /**
+         * 1. 城市报价已存在
+         * 2. 新读取的数据上传时间晚于已有数据
+         * 以上两个条件满足时，更新城市报价
+         */
+        if(targetCityQuotation) {
+          // 新读取的数据上传时间晚于已有数据
+          if(new Date(priceItem.uploadedAt) > new Date(targetCityQuotation.uploadedAt)) {
+            // 替换城市报价
+            product.cityQuotations.splice(product.cityQuotations.indexOf(targetCityQuotation), 1, priceData)
+          }
+        } else {
+          // 添加城市报价
+          product.cityQuotations.push(priceData)
+        }
       }
     } else {
       let product: ProductData = {
         name: priceItem.name,
         origin: priceItem.city,
         purchasePrice: null,
-        cityQuotation: []
+        cityQuotations: []
       }
       if(priceItem.type == 'buy') {
-        product.purchasePrice = {
-          cityName: priceItem.city,
-          price: priceItem.price,
-          pricePercent: priceItem.percent,
-          trend: priceItem.trend as PriceTrend
-        }
+        product.purchasePrice = priceData
       } else {
-        product.cityQuotation = [{
-          cityName: priceItem.targetCity,
-          price: priceItem.price,
-          pricePercent: priceItem.percent,
-          trend: priceItem.trend as PriceTrend
-        }]
+        product.cityQuotations = [priceData]
       }
       tableData.push(product)
     }
@@ -133,15 +134,14 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="product-list-wrapper">
-    <CardBox>
+  <CardBox>
+    <div class="product-list-wrapper overflow-x-auto">
       <NDataTable
         :columns="columns"
         :data="productList"
-        :scroll-x="180"
       />
-    </CardBox>
-  </div>
+    </div>
+  </CardBox>
 </template>
 
 <style>
